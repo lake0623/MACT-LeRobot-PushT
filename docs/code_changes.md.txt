@@ -1,0 +1,10 @@
+# 代码修改说明
+
+本项目基于 LeRobot 框架完成，主要修改内容如下：
+
+1. 新增 `configuration_mact.py`，用于定义 MACT 策略配置，包括 `n_obs_steps`、`use_memory`、`chunk_size` 和 `n_action_steps` 等关键参数。
+2. 新增 `modeling_mact.py`，实现记忆增强型 ACT 模型主体，包括短时历史特征组织、时间编码和动作块预测等功能。
+3. 新增 `processor_mact.py`，用于 MACT 输入处理和策略接口适配。
+4. 修改 `src/lerobot/__init__.py`，将 `mact` 加入可用策略列表。
+5. 修改 `src/lerobot/policies/__init__.py`，导入并注册 `MACTConfig`，使命令行支持 `--policy.type mact`。
+6. 在 PushT-v0 任务上完成 ACT、MACT-1、MACT-2 和 MACT-3 的训练与评测。

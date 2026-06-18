@@ -1,0 +1,93 @@
+{
+    "dataset": {
+        "repo_id": "lerobot/pusht_image",
+        "image_transforms": {
+            "enable": true,
+            "max_num_transforms": 3,
+            "random_order": false,
+            "tfs": {
+                "affine": {
+                    "type": "RandomAffine",
+                    "weight": 1.0,
+                    "kwargs": {
+                        "degrees": [
+                            -10.0,
+                            10.0
+                        ],
+                        "translate": [
+                            0.15,
+                            0.15
+                        ],
+                        "scale": [
+                            0.9,
+                            1.1
+                        ]
+                    }
+                },
+                "brightness": {
+                    "type": "ColorJitter",
+                    "weight": 1.0,
+                    "kwargs": {
+                        "brightness": [
+                            0.8,
+                            1.2
+                        ]
+                    }
+                },
+                "contrast": {
+                    "type": "ColorJitter",
+                    "weight": 1.0,
+                    "kwargs": {
+                        "contrast": [
+                            0.8,
+                            1.2
+                        ]
+                    }
+                },
+                "sharpness": {
+                    "type": "SharpnessJitter",
+                    "weight": 0.5,
+                    "kwargs": {
+                        "sharpness": [
+                            0.1,
+                            2.0
+                        ]
+                    }
+                }
+            }
+        },
+        "use_imagenet_stats": true,
+        "video_backend": "pyav"
+    },
+    "env": {
+        "type": "pusht",
+        "task": "PushT-v0"
+    },
+    "policy": {
+        "type": "mact",
+        "n_obs_steps": 2,
+        "chunk_size": 50,
+        "n_action_steps": 10,
+        "dropout": 0.15,
+        "use_memory": true,
+        "optimizer_lr": 0.0001,
+        "optimizer_lr_backbone": 1e-05,
+        "use_amp": true,
+        "vision_backbone": "resnet18",
+        "repo_id": "mact-pusht-final-v4-aug-hard"
+    },
+    "optimizer": {
+        "lr": 0.0001,
+        "weight_decay": 0.005
+    },
+    "batch_size": 64,
+    "steps": 150000,
+    "eval_freq": 10000,
+    "save_freq": 20000,
+    "save_checkpoint": true,
+    "num_workers": 8,
+    "seed": 3000,
+    "output_dir": "outputs/train/mact-pusht-final-v4-aug-hard",
+    "job_name": "pusht_mact_aug",
+    "resume": false
+}
